@@ -38,7 +38,6 @@ export class AvatarPartComponent implements OnInit {
             path += 'upperBody/';
             break;
       }
-      console.log(path + this.avatarPart.imageFile);
       return path + this.avatarPart.imageFile;
     }
   }

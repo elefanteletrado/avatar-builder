@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { AvatarPartComponent } from './components/avatar-part/avatar-part.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule, MatButtonToggleModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -12,7 +15,10 @@ import { AvatarPartComponent } from './components/avatar-part/avatar-part.compon
     AvatarPartComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
