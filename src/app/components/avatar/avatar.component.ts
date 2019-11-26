@@ -14,18 +14,25 @@ export class AvatarComponent implements OnInit {
   private upperBodyPart: AvatarPartModel;
   private lowerBodyPart: AvatarPartModel;
 
+  private x: number = 0;
+
+  private availableHats: Array<AvatarPartModel> = [
+    { id: 1, name: 'elegant', type: AvatarPartType.hat, imageFile: 'elegant.png' },
+    { id: 2, name: 'Cap', type: AvatarPartType.hat, imageFile: 'cap.png' },
+    { id: 3, name: 'Cowboy', type: AvatarPartType.hat, imageFile: 'cowboy.png' }
+  ];
+
+  public groupType: number;
+
   constructor() { }
 
   ngOnInit() {
+    this.groupType = 10;
     this.initializeAvatar();
   }
 
   initializeAvatar() {
-    this.hatPart = new AvatarPartModel();
-    this.hatPart.id = 1;
-    this.hatPart.name = 'elegant';
-    this.hatPart.type = AvatarPartType.hat;
-    this.hatPart.imageFile = 'elegant.png';
+    this.hatPart = this.availableHats[0];
 
     this.hairPart = new AvatarPartModel();
     this.hairPart.id = 2;
@@ -44,5 +51,17 @@ export class AvatarComponent implements OnInit {
     this.lowerBodyPart.name = 'shorts';
     this.lowerBodyPart.type = AvatarPartType.lowerBody;
     this.lowerBodyPart.imageFile = 'shorts-01.png';
+  }
+
+  public typeChangeHandler(val: number) {
+    this.groupType = val;
+  }
+
+  changePart() {
+    if(this.groupType === AvatarPartType.hat) {
+      this.x++;
+      if(this.x > 2) this.x = 0;
+      this.hatPart = this.availableHats[this.x];
+    }
   }
 }
