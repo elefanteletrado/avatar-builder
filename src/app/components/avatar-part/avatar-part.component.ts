@@ -18,27 +18,16 @@ export class AvatarPartComponent implements OnInit {
   }
 
   getImageFile() {
-    let path : string = "assets/";
+    let path : string = 'assets/';
 
     if(this.avatarPart == null) {
       return path + 'transparent-pixel.png';
     } else {
-      path += "parts/";
-      switch(this.avatarPart.type) {
-        case AvatarPartType.hat:
-          path += 'hat/';
-          break;
-        case AvatarPartType.hair:
-            path += 'hair/';
-            break;
-        case AvatarPartType.lowerBody:
-            path += 'lowerBody/';
-            break;
-        case AvatarPartType.upperBody:
-            path += 'upperBody/';
-            break;
-      }
-      return path + this.avatarPart.imageFile;
+      path += 'parts/' + AvatarPartType[this.avatarPart.type];
+      path += '/' + this.avatarPart.imageFile;
+
+      console.log('path', path);
+      return path;
     }
   }
 
