@@ -25,21 +25,24 @@ export class AvatarBuilderComponent implements OnInit {
   private x: number = 0;
 
   private availableParts: Array<AvatarPartModel> = [
-    { id: 1, name: 'Elegant', type: AvatarPartType.hat, imageFile: 'elegant.png' },
-    { id: 2, name: 'Cap', type: AvatarPartType.hat, imageFile: 'cap.png' },
-    { id: 3, name: 'Cowboy', type: AvatarPartType.hat, imageFile: 'cowboy.png' },
+    { id: 1, name: 'Dummy', type: AvatarPartType.body, imageFile: '01.png' },
+    { id: 2, name: 'Guy', type: AvatarPartType.body, imageFile: '02.png' },
 
-    { id: 4, name: 'Short', type: AvatarPartType.hair, imageFile: 'short-hair-01.png' },
-    { id: 5, name: 'Long', type: AvatarPartType.hair, imageFile: 'long-01.png' },
-    { id: 6, name: 'Punk', type: AvatarPartType.hair, imageFile: 'punk-01.png' },
+    { id: 11, name: 'Elegant', type: AvatarPartType.hat, imageFile: 'elegant.png' },
+    { id: 12, name: 'Cap', type: AvatarPartType.hat, imageFile: 'cap.png' },
+    { id: 13, name: 'Cowboy', type: AvatarPartType.hat, imageFile: 'cowboy.png' },
 
-    { id: 7, name: 'Shirt', type: AvatarPartType.upperBody, imageFile: 'shirt-01.png' },
-    { id: 8, name: 'Long Sleeve', type: AvatarPartType.upperBody, imageFile: 'shirt-02.png' },
-    { id: 9, name: 'Dress', type: AvatarPartType.upperBody, imageFile: 'dress-01.png' },
+    { id: 24, name: 'Short', type: AvatarPartType.hair, imageFile: 'short-hair-01.png' },
+    { id: 25, name: 'Long', type: AvatarPartType.hair, imageFile: 'long-01.png' },
+    { id: 26, name: 'Punk', type: AvatarPartType.hair, imageFile: 'punk-01.png' },
 
-    { id: 10, name: 'Shorts', type: AvatarPartType.lowerBody, imageFile: 'shorts-01.png' },
-    { id: 11, name: 'Pants', type: AvatarPartType.lowerBody, imageFile: 'pants-01.png' },
-    { id: 12, name: 'Skirt', type: AvatarPartType.lowerBody, imageFile: 'skirt-01.png' },
+    { id: 37, name: 'Shirt', type: AvatarPartType.upperBody, imageFile: 'shirt-01.png' },
+    { id: 38, name: 'Long Sleeve', type: AvatarPartType.upperBody, imageFile: 'shirt-02.png' },
+    { id: 39, name: 'Dress', type: AvatarPartType.upperBody, imageFile: 'dress-01.png' },
+
+    { id: 40, name: 'Shorts', type: AvatarPartType.lowerBody, imageFile: 'shorts-01.png' },
+    { id: 41, name: 'Pants', type: AvatarPartType.lowerBody, imageFile: 'pants-01.png' },
+    { id: 42, name: 'Skirt', type: AvatarPartType.lowerBody, imageFile: 'skirt-01.png' },
 
   ];
 
