@@ -26,7 +26,7 @@ export class AvatarPartComponent implements OnInit {
       path += "parts/";
       switch(this.avatarPart.type) {
         case AvatarPartType.hat:
-          path += 'hats/';
+          path += 'hat/';
           break;
         case AvatarPartType.hair:
             path += 'hair/';
