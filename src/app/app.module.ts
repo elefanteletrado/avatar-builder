@@ -7,12 +7,14 @@ import { AvatarPartComponent } from './components/avatar-part/avatar-part.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule, MatButtonToggleModule } from '@angular/material';
+import { AvatarBuilderComponent } from './components/avatar-builder/avatar-builder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AvatarComponent,
-    AvatarPartComponent
+    AvatarPartComponent,
+    AvatarBuilderComponent
   ],
   imports: [
     BrowserModule,

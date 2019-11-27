@@ -1,24 +1,9 @@
 <div style="position: absolute; top: 100px; left: 200px;">
-  <app-avatar-part [avatarPart]="hatPart"></app-avatar-part>
-  <app-avatar-part [avatarPart]="hairPart"></app-avatar-part>
-  <app-avatar-part [avatarPart]="upperBodyPart"></app-avatar-part>
-  <app-avatar-part [avatarPart]="lowerBodyPart"></app-avatar-part>
+  <app-avatar-part
+    *ngFor="let part of avatar.parts"
+    style="position: absolute;"
+    [style.top.px]="part.y"
+    [style.left.px]="part.x"
+    [avatarPart]="part.data">
+  </app-avatar-part>
 </div>
-
-<mat-button-toggle-group #group="matButtonToggleGroup" [value]="groupType" (change)="typeChangeHandler(group.value)">
-  <mat-button-toggle value="10" aria-label="Text align left">
-    <span>Chapeu</span>
-  </mat-button-toggle>
-  <mat-button-toggle value="20" aria-label="Text align center">
-    <span>Cabelo</span>
-  </mat-button-toggle>
-  <mat-button-toggle value="30" aria-label="Text align right">
-    <span>Tronco</span>
-  </mat-button-toggle>
-  <mat-button-toggle value="40" aria-label="Text align justify">
-    Pernas
-  </mat-button-toggle>
-</mat-button-toggle-group>
-<div class="example-selected-value">Selected value: {{groupType}}</div>
-
-<button mat-flat-button color="accent" (click)="changePart()">Primary</button>
