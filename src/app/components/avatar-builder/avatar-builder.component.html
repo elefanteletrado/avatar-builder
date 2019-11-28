@@ -1,19 +1,23 @@
 <app-avatar [avatar]="avatar"></app-avatar>
 
-<mat-button-toggle-group #group="matButtonToggleGroup" [value]="groupType" (change)="typeChangeHandler(group.value)">
-  <mat-button-toggle value="10" aria-label="Text align left">
+<mat-button-toggle-group #group="matButtonToggleGroup" value="3">
+  <mat-button-toggle value="0" aria-label="Corpo">
+    <span>Corpo</span>
+  </mat-button-toggle>
+  <mat-button-toggle value="1" aria-label="Text align left">
     <span>Chapeu</span>
   </mat-button-toggle>
-  <mat-button-toggle value="20" aria-label="Text align center">
+  <mat-button-toggle value="2" aria-label="Text align center">
     <span>Cabelo</span>
   </mat-button-toggle>
-  <mat-button-toggle value="30" aria-label="Text align right">
+  <mat-button-toggle value="3" aria-label="Text align right">
     <span>Tronco</span>
   </mat-button-toggle>
-  <mat-button-toggle value="40" aria-label="Text align justify">
+  <mat-button-toggle value="4" aria-label="Text align justify">
     Pernas
   </mat-button-toggle>
 </mat-button-toggle-group>
-<div class="example-selected-value">Selected value: {{groupType}}</div>
+<div class="example-selected-value">Selected value: {{group.value}}</div>
 
-<button mat-flat-button color="accent" (click)="changePart()">Primary</button>
+<button mat-flat-button color="accent" (click)="changePart(group.value, -1)">Prev</button>
+<button mat-flat-button color="accent" (click)="changePart(group.value, +1)">Next</button>

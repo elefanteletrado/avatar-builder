@@ -12,17 +12,11 @@ export class AvatarBuilderComponent implements OnInit {
 
   private avatar: Avatar;
 
-  constructor() {
-
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.groupType = AvatarPartType.hat;
     this.initializeAvatar();
   }
-
-  public groupType: AvatarPartType;
-  private x: number = 0;
 
   private availableParts: Array<AvatarPartModel> = [
     { id: 1, name: 'Dummy', type: AvatarPartType.body, imageFile: '01.png' },
@@ -47,31 +41,52 @@ export class AvatarBuilderComponent implements OnInit {
   ];
 
 
+  private avatarPartConfig: Array<any> = [];
+
   initializeAvatar() {
+    // todo: montar dinamicamente conforme this.availableParts
+    this.avatarPartConfig[AvatarPartType.body] = { totalParts: 2, currentIndex: 0 };
+    this.avatarPartConfig[AvatarPartType.hat] = { totalParts: 3, currentIndex: 1 };
+    this.avatarPartConfig[AvatarPartType.hair] = { totalParts: 3, currentIndex: 2 };
+    this.avatarPartConfig[AvatarPartType.upperBody] = { totalParts: 3, currentIndex: 1 };
+    this.avatarPartConfig[AvatarPartType.lowerBody] = { totalParts: 3, currentIndex: 0 };
+
+    console.log('this.avatarPartConfig', this.avatarPartConfig);
     this.avatar = new Avatar();
     this.avatar.parts.forEach(p => {
-
-      //todo: monta os avalilable parts conforme os tipos disponíveis.
-      console.log('Avatar Part>', AvatarPartType[p.type]);
-
-      p.data = this.availableParts.filter(a => a.type == p.type)[0];
+      p.data = this.getPartModelForType(p.type);
     });
-
-    console.log('avatar-builder> avatar', this.avatar);
+    console.log('this.avatar', this.avatar);
   }
 
-  public typeChangeHandler(val: AvatarPartType) {
-    this.groupType = +val;
+  setAvatarPartModelToCurrentConfigIndex(type: AvatarPartType) {
+    console.log('this.avatar.parts', this.avatar.parts);
+    this.avatar.parts[type].data = this.getPartModelForType(type);
   }
 
-  changePart() {
-    console.log(this.groupType, AvatarPartType.hat, (this.groupType === AvatarPartType.hat));
-    //if(this.groupType === AvatarPartType.hat) {
-    //  this.x++;
-    //  if(this.x > 2) this.x = 0;
-    //  this.avatar.hatPart = this.availableParts[this.x];
-    //}
+  getPartModelForType(type: AvatarPartType) {
+    // busca na lista de available parts
+    // a parte do tipo conforme o índice no
+    // avatarPartConfig do mesmo tipo
+    let selectedPartIndex = this.getPartConfigByType(type).currentIndex;
+    return this.availableParts.filter(a => a.type == type)[selectedPartIndex];
   }
 
+  getPartConfigByType(type: AvatarPartType) {
+    return this.avatarPartConfig[type];
+  }
 
+  changePart(_type: string, direction: number) {
+    let type: number = +_type; // plus sign converts string to number
+    let config = this.getPartConfigByType(type);
+    config.currentIndex = config.currentIndex + direction;
+    if (config.currentIndex >= config.totalParts) {
+      config.currentIndex = 0;
+    } else {
+      if (config.currentIndex < 0) {
+        config.currentIndex = config.totalParts - 1;
+      }
+    }
+    this.setAvatarPartModelToCurrentConfigIndex(type);
+  }
 }
