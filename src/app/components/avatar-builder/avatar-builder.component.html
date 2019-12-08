@@ -1,23 +1,21 @@
-<app-avatar [avatar]="avatar"></app-avatar>
-
-<mat-button-toggle-group #group="matButtonToggleGroup" value="3">
-  <mat-button-toggle value="0" aria-label="Corpo">
-    <span>Corpo</span>
-  </mat-button-toggle>
-  <mat-button-toggle value="1" aria-label="Text align left">
-    <span>Chapeu</span>
-  </mat-button-toggle>
-  <mat-button-toggle value="2" aria-label="Text align center">
-    <span>Cabelo</span>
-  </mat-button-toggle>
-  <mat-button-toggle value="3" aria-label="Text align right">
-    <span>Tronco</span>
-  </mat-button-toggle>
-  <mat-button-toggle value="4" aria-label="Text align justify">
-    Pernas
-  </mat-button-toggle>
+<mat-button-toggle-group #group="matButtonToggleGroup" value="1">
+  <mat-button-toggle value="0"><span>accessories</span></mat-button-toggle>
+  <mat-button-toggle value="1"><span>arm</span></mat-button-toggle>
+  <mat-button-toggle value="2"><span>body</span></mat-button-toggle>
+  <mat-button-toggle value="3"><span>eyes</span></mat-button-toggle>
+  <mat-button-toggle value="4"><span>foot</span></mat-button-toggle>
+  <mat-button-toggle value="5"><span>glasses</span></mat-button-toggle>
+  <mat-button-toggle value="6"><span>hair</span></mat-button-toggle>
+  <mat-button-toggle value="7"><span>hat</span></mat-button-toggle>
+  <mat-button-toggle value="8"><span>lowerBody</span></mat-button-toggle>
+  <mat-button-toggle value="9"><span>mouth</span></mat-button-toggle>
+  <mat-button-toggle value="10"><span>nose</span></mat-button-toggle>
+  <mat-button-toggle value="11"><span>upperBody</span></mat-button-toggle>
 </mat-button-toggle-group>
+
 <div class="example-selected-value">Selected value: {{group.value}}</div>
 
 <button mat-flat-button color="accent" (click)="changePart(group.value, -1)">Prev</button>
 <button mat-flat-button color="accent" (click)="changePart(group.value, +1)">Next</button>
+
+<app-avatar [avatar]="avatar"></app-avatar>

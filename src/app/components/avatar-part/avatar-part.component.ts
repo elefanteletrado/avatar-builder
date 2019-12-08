@@ -18,9 +18,13 @@ export class AvatarPartComponent implements OnInit {
   }
 
   getImageFile() {
-    return (this.avatarPart == null)
+    let file = (this.avatarPart == null)
       ? 'assets/transparent-pixel.png'
       : `assets/parts/${AvatarPartType[this.avatarPart.type]}/${this.avatarPart.imageFile}`;
+
+    console.log('getImageFile', file);
+
+    return file;
   }
 
 }
