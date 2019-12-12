@@ -9,7 +9,7 @@ import { AvatarPartModel } from '../../classes/avatar-part-model';
 })
 export class AvatarPartComponent implements OnInit {
 
-  @Input() avatarPart : AvatarPartModel;
+  @Input() avatarPart: AvatarPartModel;
 
   constructor() {
   }
@@ -21,8 +21,6 @@ export class AvatarPartComponent implements OnInit {
     let file = (this.avatarPart == null)
       ? 'assets/transparent-pixel.png'
       : `assets/parts/${AvatarPartType[this.avatarPart.type]}/${this.avatarPart.imageFile}`;
-
-    console.log('getImageFile', file);
 
     return file;
   }

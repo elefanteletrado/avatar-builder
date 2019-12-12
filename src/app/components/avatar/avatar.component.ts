@@ -15,9 +15,7 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit() { }
 
-  getPartStyle(part: AvatarPartDefinition): string {
-    let style: string = "position: absolute; top: " + part.x + "; left: " + part.y + ";";
-    console.log('style', style);
-    return style;
+  getAvatarParts() {
+    return this.avatar.parts.filter(p => p.data != null);
   }
 }

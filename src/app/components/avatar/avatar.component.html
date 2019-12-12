@@ -1,9 +1,7 @@
-<div style="position: absolute; top: 100px; left: 200px;">
-  <app-avatar-part
-    *ngFor="let part of avatar.parts"
-    style="position: absolute;"
-    [style.top.px]="part.y"
-    [style.left.px]="part.x"
+<div name="avatar-component" >
+  <app-avatar-part *ngFor="let part of getAvatarParts()"
+    style="position: absolute; border: 1px solid lightblue; width: 300px; "
+    [style.zIndex]="part.data.z"
     [avatarPart]="part.data">
   </app-avatar-part>
 </div>
