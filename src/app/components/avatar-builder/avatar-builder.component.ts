@@ -11,6 +11,9 @@ import { Avatar } from '../../classes/avatar';
 export class AvatarBuilderComponent implements OnInit {
 
   private avatar: Avatar;
+  public selectedPartInfo: string = '-';
+  public availableTypes: Array<any>;
+  public groupType: string;
 
   constructor() { }
 
@@ -18,125 +21,148 @@ export class AvatarBuilderComponent implements OnInit {
     this.initializeAvatar();
   }
 
-  // isso deve vir de um repositório, seja um json ou um banco de dados
-  private availableParts: Array<AvatarPartModel> = [
-    { id: 0, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_01A.svg', x: 0, y: 0, z: 0 },
-    { id: 1, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_01B.svg', x: 0, y: 0, z: 0 },
-    { id: 2, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_01C.svg', x: 0, y: 0, z: 0 },
-    { id: 3, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_02A.svg', x: 0, y: 0, z: 0 },
-    { id: 4, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_02B.svg', x: 0, y: 0, z: 0 },
-    { id: 5, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_02C.svg', x: 0, y: 0, z: 0 },
-    { id: 6, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_03A.svg', x: 0, y: 0, z: 0 },
-    { id: 7, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_03B.svg', x: 0, y: 0, z: 0 },
-    { id: 8, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_03C.svg', x: 0, y: 0, z: 0 },
-    { id: 9, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_04A.svg', x: 0, y: 0, z: 0 },
-    { id: 10, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_04B.svg', x: 0, y: 0, z: 0 },
-    { id: 11, enabled: true, name: '', type: AvatarPartType.arm, imageFile: 'Elefante_Avatar_Braco_04C.svg', x: 0, y: 0, z: 0 },
-    { id: 12, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_01A.svg', x: 0, y: 0, z: 0 },
-    { id: 13, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_01B.svg', x: 0, y: 0, z: 0 },
-    { id: 14, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_01C.svg', x: 0, y: 0, z: 0 },
-    { id: 15, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_02A.svg', x: 0, y: 0, z: 0 },
-    { id: 16, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_02B.svg', x: 0, y: 0, z: 0 },
-    { id: 17, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_02C.svg', x: 0, y: 0, z: 0 },
-    { id: 18, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_03A.svg', x: 0, y: 0, z: 0 },
-    { id: 19, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_03B.svg', x: 0, y: 0, z: 0 },
-    { id: 20, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_03C.svg', x: 0, y: 0, z: 0 },
-    { id: 21, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_04A.svg', x: 0, y: 0, z: 0 },
-    { id: 22, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_04B.svg', x: 0, y: 0, z: 0 },
-    { id: 23, enabled: true, name: '', type: AvatarPartType.body, imageFile: 'Elefante_Avatar_Corpo_04C.svg', x: 0, y: 0, z: 0 },
-    { id: 24, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_01A.svg', x: 0, y: 0, z: 0 },
-    { id: 25, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_01B.svg', x: 0, y: 0, z: 0 },
-    { id: 26, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_01C.svg', x: 0, y: 0, z: 0 },
-    { id: 27, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_01D.svg', x: 0, y: 0, z: 0 },
-    { id: 28, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_02A.svg', x: 0, y: 0, z: 0 },
-    { id: 29, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_02B.svg', x: 0, y: 0, z: 0 },
-    { id: 30, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_02C.svg', x: 0, y: 0, z: 0 },
-    { id: 31, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_02D.svg', x: 0, y: 0, z: 0 },
-    { id: 32, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_03A.svg', x: 0, y: 0, z: 0 },
-    { id: 33, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_03B.svg', x: 0, y: 0, z: 0 },
-    { id: 34, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_03C.svg', x: 0, y: 0, z: 0 },
-    { id: 35, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_03D.svg', x: 0, y: 0, z: 0 },
-    { id: 36, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_04A.svg', x: 0, y: 0, z: 0 },
-    { id: 37, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_04B.svg', x: 0, y: 0, z: 0 },
-    { id: 38, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_04C.svg', x: 0, y: 0, z: 0 },
-    { id: 39, enabled: true, name: '', type: AvatarPartType.eyes, imageFile: 'Elefante_Avatar_Olhos_04D.svg', x: 0, y: 0, z: 0 },
-    { id: 40, enabled: true, name: '', type: AvatarPartType.foot, imageFile: 'Elefante_Avatar_Chinelos_01.svg', x: 0, y: 0, z: 0 },
-    { id: 41, enabled: true, name: '', type: AvatarPartType.foot, imageFile: 'Elefante_Avatar_Rasteirinhas_01.svg', x: 0, y: 0, z: 0 },
-    { id: 42, enabled: true, name: '', type: AvatarPartType.foot, imageFile: 'Elefante_Avatar_Sandalias_01.svg', x: 0, y: 0, z: 0 },
-    { id: 43, enabled: true, name: '', type: AvatarPartType.foot, imageFile: 'Elefante_Avatar_Sapatenis_01.svg', x: 0, y: 0, z: 0 },
-    { id: 44, enabled: true, name: '', type: AvatarPartType.foot, imageFile: 'Elefante_Avatar_Tenis_01.svg', x: 0, y: 0, z: 0 },
-    { id: 45, enabled: true, name: '', type: AvatarPartType.glasses, imageFile: 'Elefante_Avatar_Oculos_01.svg', x: 0, y: 0, z: 0 },
-    { id: 46, enabled: true, name: '', type: AvatarPartType.glasses, imageFile: 'Elefante_Avatar_Oculos_02.svg', x: 0, y: 0, z: 0 },
-    { id: 47, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_01A.svg', x: 0, y: 0, z: 0 },
-    { id: 48, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_01B.svg', x: 0, y: 0, z: 0 },
-    { id: 49, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_01C.svg', x: 0, y: 0, z: 0 },
-    { id: 50, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_01D.svg', x: 0, y: 0, z: 0 },
-    { id: 51, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_01E.svg', x: 0, y: 0, z: 0 },
-    { id: 52, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_02A.svg', x: 0, y: 0, z: 0 },
-    { id: 53, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_02B.svg', x: 0, y: 0, z: 0 },
-    { id: 54, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_02C.svg', x: 0, y: 0, z: 0 },
-    { id: 55, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_02D.svg', x: 0, y: 0, z: 0 },
-    { id: 56, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_02E.svg', x: 0, y: 0, z: 0 },
-    { id: 57, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_03A.svg', x: 0, y: 0, z: 0 },
-    { id: 58, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_03B.svg', x: 0, y: 0, z: 0 },
-    { id: 59, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_03C.svg', x: 0, y: 0, z: 0 },
-    { id: 60, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_03D.svg', x: 0, y: 0, z: 0 },
-    { id: 61, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_03E.svg', x: 0, y: 0, z: 0 },
-    { id: 62, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_04A.svg', x: 0, y: 0, z: 0 },
-    { id: 63, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_04B.svg', x: 0, y: 0, z: 0 },
-    { id: 64, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_04C.svg', x: 0, y: 0, z: 0 },
-    { id: 65, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_04D.svg', x: 0, y: 0, z: 0 },
-    { id: 66, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_04E.svg', x: 0, y: 0, z: 0 },
-    { id: 67, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_05A.svg', x: 0, y: 0, z: 0 },
-    { id: 68, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_05B.svg', x: 0, y: 0, z: 0 },
-    { id: 69, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_05C.svg', x: 0, y: 0, z: 0 },
-    { id: 70, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_05D.svg', x: 0, y: 0, z: 0 },
-    { id: 71, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_05E.svg', x: 0, y: 0, z: 0 },
-    { id: 72, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_06A.svg', x: 0, y: 0, z: 0 },
-    { id: 73, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_06B.svg', x: 0, y: 0, z: 0 },
-    { id: 74, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_06C.svg', x: 0, y: 0, z: 0 },
-    { id: 75, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_06D.svg', x: 0, y: 0, z: 0 },
-    { id: 76, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_06E.svg', x: 0, y: 0, z: 0 },
-    { id: 77, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_07A.svg', x: 0, y: 0, z: 0 },
-    { id: 78, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_07B.svg', x: 0, y: 0, z: 0 },
-    { id: 79, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_07C.svg', x: 0, y: 0, z: 0 },
-    { id: 80, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_07D.svg', x: 0, y: 0, z: 0 },
-    { id: 81, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_07E.svg', x: 0, y: 0, z: 0 },
-    { id: 82, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_08A.svg', x: 0, y: 0, z: 0 },
-    { id: 83, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_08B.svg', x: 0, y: 0, z: 0 },
-    { id: 84, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_08C.svg', x: 0, y: 0, z: 0 },
-    { id: 85, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_08D.svg', x: 0, y: 0, z: 0 },
-    { id: 86, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_08E.svg', x: 0, y: 0, z: 0 },
-    { id: 87, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_09A.svg', x: 0, y: 0, z: 0 },
-    { id: 88, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_09B.svg', x: 0, y: 0, z: 0 },
-    { id: 89, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_09C.svg', x: 0, y: 0, z: 0 },
-    { id: 90, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_09D.svg', x: 0, y: 0, z: 0 },
-    { id: 91, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_09E.svg', x: 0, y: 0, z: 0 },
-    { id: 92, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_10A.svg', x: 0, y: 0, z: 0 },
-    { id: 93, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_10B.svg', x: 0, y: 0, z: 0 },
-    { id: 94, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_10C.svg', x: 0, y: 0, z: 0 },
-    { id: 95, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_10D.svg', x: 0, y: 0, z: 0 },
-    { id: 96, enabled: true, name: '', type: AvatarPartType.hair, imageFile: 'Elefante_Avatar_Cabelo_10E.svg', x: 0, y: 0, z: 0 },
-    { id: 97, enabled: true, name: '', type: AvatarPartType.lowerBody, imageFile: 'Elefante_Avatar_Bermuda_01.svg', x: 0, y: 0, z: 0 },
-    { id: 98, enabled: true, name: '', type: AvatarPartType.lowerBody, imageFile: 'Elefante_Avatar_Calca_01.svg', x: 0, y: 0, z: 0 },
-    { id: 99, enabled: true, name: '', type: AvatarPartType.lowerBody, imageFile: 'Elefante_Avatar_Calca_02.svg', x: 0, y: 0, z: 0 },
-    { id: 100, enabled: true, name: '', type: AvatarPartType.lowerBody, imageFile: 'Elefante_Avatar_Saia_01.svg', x: 0, y: 0, z: 0 },
-    { id: 101, enabled: true, name: '', type: AvatarPartType.mouth, imageFile: 'Elefante_Avatar_Boca_01.svg', x: 0, y: 0, z: 0 },
-    { id: 102, enabled: true, name: '', type: AvatarPartType.mouth, imageFile: 'Elefante_Avatar_Boca_02.svg', x: 0, y: 0, z: 0 },
-    { id: 103, enabled: true, name: '', type: AvatarPartType.mouth, imageFile: 'Elefante_Avatar_Boca_03.svg', x: 0, y: 0, z: 0 },
-    { id: 104, enabled: true, name: '', type: AvatarPartType.mouth, imageFile: 'Elefante_Avatar_Boca_04.svg', x: 0, y: 0, z: 0 },
-    { id: 105, enabled: true, name: '', type: AvatarPartType.nose, imageFile: 'Elefante_Avatar_Nariz_01.svg', x: 0, y: 0, z: 0 },
-    { id: 106, enabled: true, name: '', type: AvatarPartType.nose, imageFile: 'Elefante_Avatar_Nariz_02.svg', x: 0, y: 0, z: 0 },
-    { id: 107, enabled: true, name: '', type: AvatarPartType.upperBody, imageFile: 'Elefante_Avatar_Blusa_01.svg', x: 0, y: 0, z: 0 },
-    { id: 108, enabled: true, name: '', type: AvatarPartType.upperBody, imageFile: 'Elefante_Avatar_Camiseta_01.svg', x: 0, y: 0, z: 0 },
-    { id: 109, enabled: true, name: '', type: AvatarPartType.upperBody, imageFile: 'Elefante_Avatar_Vestido_01.svg', x: 0, y: 0, z: 0 }
-  ];
 
+  private availableParts: Array<AvatarPartModel> = [];
   private avatarPartConfig: Array<any> = [];
 
+  public typeChangeHandler(val: AvatarPartType) {
+    this.groupType = val.toString();
+  }
+
   initializeAvatar() {
+    // isso deve vir de um repositório, seja um json ou um banco de dados
+    this.availableParts.push(new AvatarPartModel(-1, AvatarPartType.none, 'null.svg'));
+    this.availableParts.push(new AvatarPartModel(9000, AvatarPartType.foot, 'null.svg'));
+    this.availableParts.push(new AvatarPartModel(9001, AvatarPartType.glasses, 'null.svg'));
+    this.availableParts.push(new AvatarPartModel(9002, AvatarPartType.hair, 'null.svg'));
+
+    this.availableParts.push(new AvatarPartModel(1000, AvatarPartType.arm, 'Elefante_Avatar_Braco_01A.svg'));
+    this.availableParts.push(new AvatarPartModel(1001, AvatarPartType.arm, 'Elefante_Avatar_Braco_01B.svg'));
+    this.availableParts.push(new AvatarPartModel(1002, AvatarPartType.arm, 'Elefante_Avatar_Braco_01C.svg'));
+    this.availableParts.push(new AvatarPartModel(1003, AvatarPartType.arm, 'Elefante_Avatar_Braco_02A.svg'));
+    this.availableParts.push(new AvatarPartModel(1004, AvatarPartType.arm, 'Elefante_Avatar_Braco_02B.svg'));
+    this.availableParts.push(new AvatarPartModel(1005, AvatarPartType.arm, 'Elefante_Avatar_Braco_02C.svg'));
+    this.availableParts.push(new AvatarPartModel(1006, AvatarPartType.arm, 'Elefante_Avatar_Braco_03A.svg'));
+    this.availableParts.push(new AvatarPartModel(1007, AvatarPartType.arm, 'Elefante_Avatar_Braco_03B.svg'));
+    this.availableParts.push(new AvatarPartModel(1008, AvatarPartType.arm, 'Elefante_Avatar_Braco_03C.svg'));
+    this.availableParts.push(new AvatarPartModel(1009, AvatarPartType.arm, 'Elefante_Avatar_Braco_04A.svg'));
+    this.availableParts.push(new AvatarPartModel(1010, AvatarPartType.arm, 'Elefante_Avatar_Braco_04B.svg'));
+    this.availableParts.push(new AvatarPartModel(1011, AvatarPartType.arm, 'Elefante_Avatar_Braco_04C.svg'));
+
+    this.availableParts.forEach(p => { p.z = 1; });
+
+    let whiteArmsIndex = [1000, 1001, 1002];
+    let tammedArmsIndex = [1003, 1004, 1005];
+    let brownArmsIndex = [1006, 1007, 1008];
+    let blackArmsIndex = [1009, 1010, 1011];
+
+    let allButWhite = [...tammedArmsIndex, ...brownArmsIndex, ...blackArmsIndex];
+    let allButTammed = [...whiteArmsIndex, ...brownArmsIndex, ...blackArmsIndex];
+    let allButBrown = [...tammedArmsIndex, ...whiteArmsIndex, ...blackArmsIndex];
+    let allButBlack = [...tammedArmsIndex, ...brownArmsIndex, ...whiteArmsIndex];
+
+    this.availableParts.push(new AvatarPartModel(12, AvatarPartType.body, 'Elefante_Avatar_Corpo_01A.svg', [], allButWhite));
+    this.availableParts.push(new AvatarPartModel(13, AvatarPartType.body, 'Elefante_Avatar_Corpo_01B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButWhite));
+    this.availableParts.push(new AvatarPartModel(14, AvatarPartType.body, 'Elefante_Avatar_Corpo_01C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButWhite));
+    this.availableParts.push(new AvatarPartModel(15, AvatarPartType.body, 'Elefante_Avatar_Corpo_02A.svg', [], allButTammed));
+    this.availableParts.push(new AvatarPartModel(16, AvatarPartType.body, 'Elefante_Avatar_Corpo_02B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButTammed));
+    this.availableParts.push(new AvatarPartModel(17, AvatarPartType.body, 'Elefante_Avatar_Corpo_02C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButTammed));
+    this.availableParts.push(new AvatarPartModel(18, AvatarPartType.body, 'Elefante_Avatar_Corpo_03A.svg', [], allButBrown));
+    this.availableParts.push(new AvatarPartModel(19, AvatarPartType.body, 'Elefante_Avatar_Corpo_03B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBrown));
+    this.availableParts.push(new AvatarPartModel(20, AvatarPartType.body, 'Elefante_Avatar_Corpo_03C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBrown));
+    this.availableParts.push(new AvatarPartModel(21, AvatarPartType.body, 'Elefante_Avatar_Corpo_04A.svg', [], allButBlack));
+    this.availableParts.push(new AvatarPartModel(22, AvatarPartType.body, 'Elefante_Avatar_Corpo_04B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBlack));
+    this.availableParts.push(new AvatarPartModel(23, AvatarPartType.body, 'Elefante_Avatar_Corpo_04C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBlack));
+    this.availableParts.push(new AvatarPartModel(24, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_01A.svg'));
+    this.availableParts.push(new AvatarPartModel(25, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_01B.svg'));
+    this.availableParts.push(new AvatarPartModel(26, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_01C.svg'));
+    this.availableParts.push(new AvatarPartModel(27, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_01D.svg'));
+    this.availableParts.push(new AvatarPartModel(28, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_02A.svg'));
+    this.availableParts.push(new AvatarPartModel(29, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_02B.svg'));
+    this.availableParts.push(new AvatarPartModel(30, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_02C.svg'));
+    this.availableParts.push(new AvatarPartModel(31, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_02D.svg'));
+    this.availableParts.push(new AvatarPartModel(32, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_03A.svg'));
+    this.availableParts.push(new AvatarPartModel(33, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_03B.svg'));
+    this.availableParts.push(new AvatarPartModel(34, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_03C.svg'));
+    this.availableParts.push(new AvatarPartModel(35, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_03D.svg'));
+    this.availableParts.push(new AvatarPartModel(36, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_04A.svg'));
+    this.availableParts.push(new AvatarPartModel(37, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_04B.svg'));
+    this.availableParts.push(new AvatarPartModel(38, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_04C.svg'));
+    this.availableParts.push(new AvatarPartModel(39, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_04D.svg'));
+    this.availableParts.push(new AvatarPartModel(40, AvatarPartType.foot, 'Elefante_Avatar_Chinelos_01.svg'));
+    this.availableParts.push(new AvatarPartModel(41, AvatarPartType.foot, 'Elefante_Avatar_Rasteirinhas_01.svg'));
+    this.availableParts.push(new AvatarPartModel(42, AvatarPartType.foot, 'Elefante_Avatar_Sandalias_01.svg'));
+    this.availableParts.push(new AvatarPartModel(43, AvatarPartType.foot, 'Elefante_Avatar_Sapatenis_01.svg'));
+    this.availableParts.push(new AvatarPartModel(44, AvatarPartType.foot, 'Elefante_Avatar_Tenis_01.svg'));
+    this.availableParts.push(new AvatarPartModel(45, AvatarPartType.glasses, 'Elefante_Avatar_Oculos_01.svg'));
+    this.availableParts.push(new AvatarPartModel(46, AvatarPartType.glasses, 'Elefante_Avatar_Oculos_02.svg'));
+    this.availableParts.push(new AvatarPartModel(47, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_01A.svg'));
+    this.availableParts.push(new AvatarPartModel(48, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_01B.svg'));
+    this.availableParts.push(new AvatarPartModel(49, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_01C.svg'));
+    this.availableParts.push(new AvatarPartModel(50, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_01D.svg'));
+    this.availableParts.push(new AvatarPartModel(51, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_01E.svg'));
+    this.availableParts.push(new AvatarPartModel(52, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_02A.svg'));
+    this.availableParts.push(new AvatarPartModel(53, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_02B.svg'));
+    this.availableParts.push(new AvatarPartModel(54, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_02C.svg'));
+    this.availableParts.push(new AvatarPartModel(55, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_02D.svg'));
+    this.availableParts.push(new AvatarPartModel(56, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_02E.svg'));
+    this.availableParts.push(new AvatarPartModel(57, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_03A.svg'));
+    this.availableParts.push(new AvatarPartModel(58, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_03B.svg'));
+    this.availableParts.push(new AvatarPartModel(59, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_03C.svg'));
+    this.availableParts.push(new AvatarPartModel(60, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_03D.svg'));
+    this.availableParts.push(new AvatarPartModel(61, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_03E.svg'));
+    this.availableParts.push(new AvatarPartModel(62, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_04A.svg'));
+    this.availableParts.push(new AvatarPartModel(63, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_04B.svg'));
+    this.availableParts.push(new AvatarPartModel(64, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_04C.svg'));
+    this.availableParts.push(new AvatarPartModel(65, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_04D.svg'));
+    this.availableParts.push(new AvatarPartModel(66, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_04E.svg'));
+    this.availableParts.push(new AvatarPartModel(67, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_05A.svg'));
+    this.availableParts.push(new AvatarPartModel(68, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_05B.svg'));
+    this.availableParts.push(new AvatarPartModel(69, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_05C.svg'));
+    this.availableParts.push(new AvatarPartModel(70, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_05D.svg'));
+    this.availableParts.push(new AvatarPartModel(71, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_05E.svg'));
+    this.availableParts.push(new AvatarPartModel(72, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_06A.svg'));
+    this.availableParts.push(new AvatarPartModel(73, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_06B.svg'));
+    this.availableParts.push(new AvatarPartModel(74, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_06C.svg'));
+    this.availableParts.push(new AvatarPartModel(75, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_06D.svg'));
+    this.availableParts.push(new AvatarPartModel(76, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_06E.svg'));
+    this.availableParts.push(new AvatarPartModel(77, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_07A.svg'));
+    this.availableParts.push(new AvatarPartModel(78, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_07B.svg'));
+    this.availableParts.push(new AvatarPartModel(79, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_07C.svg'));
+    this.availableParts.push(new AvatarPartModel(80, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_07D.svg'));
+    this.availableParts.push(new AvatarPartModel(81, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_07E.svg'));
+    this.availableParts.push(new AvatarPartModel(82, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_08A.svg'));
+    this.availableParts.push(new AvatarPartModel(83, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_08B.svg'));
+    this.availableParts.push(new AvatarPartModel(84, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_08C.svg'));
+    this.availableParts.push(new AvatarPartModel(85, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_08D.svg'));
+    this.availableParts.push(new AvatarPartModel(86, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_08E.svg'));
+    this.availableParts.push(new AvatarPartModel(87, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_09A.svg'));
+    this.availableParts.push(new AvatarPartModel(88, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_09B.svg'));
+    this.availableParts.push(new AvatarPartModel(89, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_09C.svg'));
+    this.availableParts.push(new AvatarPartModel(90, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_09D.svg'));
+    this.availableParts.push(new AvatarPartModel(91, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_09E.svg'));
+    this.availableParts.push(new AvatarPartModel(92, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_10A.svg'));
+    this.availableParts.push(new AvatarPartModel(93, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_10B.svg'));
+    this.availableParts.push(new AvatarPartModel(94, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_10C.svg'));
+    this.availableParts.push(new AvatarPartModel(95, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_10D.svg'));
+    this.availableParts.push(new AvatarPartModel(96, AvatarPartType.hair, 'Elefante_Avatar_Cabelo_10E.svg'));
+    this.availableParts.push(new AvatarPartModel(97, AvatarPartType.lowerBody, 'Elefante_Avatar_Bermuda_01.svg'));
+    this.availableParts.push(new AvatarPartModel(98, AvatarPartType.lowerBody, 'Elefante_Avatar_Calca_01.svg'));
+    this.availableParts.push(new AvatarPartModel(99, AvatarPartType.lowerBody, 'Elefante_Avatar_Calca_02.svg'));
+    this.availableParts.push(new AvatarPartModel(100, AvatarPartType.lowerBody, 'Elefante_Avatar_Saia_01.svg'));
+    this.availableParts.push(new AvatarPartModel(101, AvatarPartType.mouth, 'Elefante_Avatar_Boca_01.svg'));
+    this.availableParts.push(new AvatarPartModel(102, AvatarPartType.mouth, 'Elefante_Avatar_Boca_02.svg'));
+    this.availableParts.push(new AvatarPartModel(103, AvatarPartType.mouth, 'Elefante_Avatar_Boca_03.svg'));
+    this.availableParts.push(new AvatarPartModel(104, AvatarPartType.mouth, 'Elefante_Avatar_Boca_04.svg'));
+    this.availableParts.push(new AvatarPartModel(105, AvatarPartType.nose, 'Elefante_Avatar_Nariz_01.svg'));
+    this.availableParts.push(new AvatarPartModel(106, AvatarPartType.nose, 'Elefante_Avatar_Nariz_02.svg'));
+    this.availableParts.push(new AvatarPartModel(107, AvatarPartType.upperBody, 'Elefante_Avatar_Blusa_01.svg'));
+    this.availableParts.push(new AvatarPartModel(108, AvatarPartType.upperBody, 'Elefante_Avatar_Camiseta_01.svg'));
+    this.availableParts.push(new AvatarPartModel(109, AvatarPartType.upperBody, 'Elefante_Avatar_Vestido_01.svg'));
+
+
     // todo: montar dinamicamente conforme this.availableParts (cada currentIndex vem do objeto salvo para o aluno)
-    this.avatarPartConfig[AvatarPartType.body] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.body).length, currentIndex: 0 };
+    this.avatarPartConfig[AvatarPartType.body] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.body).length, currentIndex: 0, rules: { disableParts: [] } };
     this.avatarPartConfig[AvatarPartType.eyes] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.eyes).length, currentIndex: 0 };
     this.avatarPartConfig[AvatarPartType.foot] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.foot).length, currentIndex: 0 };
     this.avatarPartConfig[AvatarPartType.glasses] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.glasses).length, currentIndex: 0 };
@@ -147,17 +173,48 @@ export class AvatarBuilderComponent implements OnInit {
     this.avatarPartConfig[AvatarPartType.upperBody] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.upperBody).length, currentIndex: 0 };
     this.avatarPartConfig[AvatarPartType.arm] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.arm).length, currentIndex: 0 };
 
-    console.log('this.avatarPartConfig', this.avatarPartConfig);
     this.avatar = new Avatar();
     this.avatar.parts.forEach(p => {
       p.data = this.getPartModelForType(p.type);
     });
-    console.log('this.avatar', this.avatar);
+
+    this.availableTypes = this.getAvailableTypes([]);
   }
 
   setAvatarPartModelToCurrentConfigIndex(type: AvatarPartType) {
+    // Retorna ao estado anterior as partes que estavam antes de
+    // a parte atual tê-las desabilitado (desfaz passo 2 anterior)
+    this.avatar.parts[type].data.disableTypes.forEach(t => {
+      this.avatar.parts[t].data = this.avatar.parts[t]._prevData;
+    });
+
+    // Marca nova parte atual (passo 1)
     this.avatar.parts[type].data = this.getPartModelForType(type);
-    console.log('this.avatar.parts[type].data', type, this.avatar.parts[type].data);
+
+    // Atribui parte nula para os tipos que por ventura devam ser desabilitados (passo 2)
+    if (this.avatar.parts[type].data.hasDisableTypeRules) {
+      this.availableTypes = this.getAvailableTypes(this.avatar.parts[type].data.disableTypes);
+
+      this.avatar.parts[type].data.disableTypes.forEach(t => {
+        this.avatar.parts[t]._prevData = this.avatar.parts[t].data;
+        this.avatar.parts[t].data = this.availableParts[0]; //null part
+      });
+    }
+
+    this.selectedPartInfo = `id: ${this.avatar.parts[type].data.id}, image: ${this.avatar.parts[type].data.imageFile};`;
+  }
+
+  getAvailableTypes(disabledList: Array<number>) {
+    let types: Array<any> = [];
+    for (let t in AvatarPartType) {
+      if (!isNaN(Number(t))) {
+        if (t > '0' && !disabledList.includes(+t)) {
+          types.push({ index: t, name: AvatarPartType[t] });
+        }
+      }
+    }
+    console.log(types);
+    return types;
   }
 
   getPartModelForType(type: AvatarPartType) {

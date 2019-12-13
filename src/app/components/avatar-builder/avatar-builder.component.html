@@ -1,19 +1,14 @@
-<mat-button-toggle-group #group="matButtonToggleGroup" value="2" style="z-index: 100;">
-  <mat-button-toggle value="0"><span>arm</span></mat-button-toggle>
-  <mat-button-toggle value="1"><span>body</span></mat-button-toggle>
-  <mat-button-toggle value="2"><span>eyes</span></mat-button-toggle>
-  <mat-button-toggle value="3"><span>foot</span></mat-button-toggle>
-  <mat-button-toggle value="4"><span>glasses</span></mat-button-toggle>
-  <mat-button-toggle value="5"><span>hair</span></mat-button-toggle>
-  <mat-button-toggle value="6"><span>lowerBody</span></mat-button-toggle>
-  <mat-button-toggle value="7"><span>mouth</span></mat-button-toggle>
-  <mat-button-toggle value="8"><span>nose</span></mat-button-toggle>
-  <mat-button-toggle value="9"><span>upperBody</span></mat-button-toggle>
+<mat-button-toggle-group
+  #group="matButtonToggleGroup"
+  [value]="groupType" (change)="typeChangeHandler(group.value)"
+  style="z-index: 100;">
+  <mat-button-toggle *ngFor="let t of availableTypes" [value]="t.index"><span>{{t.name}}</span></mat-button-toggle>
 </mat-button-toggle-group>
 
-<div class="example-selected-value">Selected value: {{group.value}}</div>
+<div class="example-selected-value">Selected group: {{groupType}}</div>
+<div class="example-selected-value">{{selectedPartInfo}}</div>
 
-<button mat-flat-button color="accent" (click)="changePart(group.value, -1)">Prev</button>
-<button mat-flat-button color="accent" (click)="changePart(group.value, +1)">Next</button>
+<button mat-flat-button color="accent" (click)="changePart(groupType, -1)">Prev</button>
+<button mat-flat-button color="accent" (click)="changePart(groupType, +1)">Next</button>
 
 <app-avatar [avatar]="avatar"></app-avatar>

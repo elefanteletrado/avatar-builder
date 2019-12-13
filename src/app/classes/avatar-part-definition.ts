@@ -5,4 +5,5 @@ export class AvatarPartDefinition {
   public name: string;
   public type: AvatarPartType;
   public data: AvatarPartModel;
+  public _prevData: AvatarPartModel;
 }

@@ -1,4 +1,5 @@
 export enum AvatarPartType {
+  none,
   arm,
   body,
   eyes,
