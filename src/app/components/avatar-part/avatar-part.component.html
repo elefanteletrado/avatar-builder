@@ -1,1 +1,1 @@
-<img [src]="getImageFile()" type="image/svg+xml" />
+<img *ngIf="avatarPart.visible" [src]="getImageFile()" type="image/svg+xml" class="avatar-part" [style.animState]="animState" />

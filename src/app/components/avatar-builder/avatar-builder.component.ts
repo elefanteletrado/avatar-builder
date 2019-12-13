@@ -13,7 +13,7 @@ export class AvatarBuilderComponent implements OnInit {
   private avatar: Avatar;
   public selectedPartInfo: string = '-';
   public availableTypes: Array<any>;
-  public groupType: string;
+  public groupType: string = '1';
 
   constructor() { }
 
@@ -36,43 +36,34 @@ export class AvatarBuilderComponent implements OnInit {
     this.availableParts.push(new AvatarPartModel(9001, AvatarPartType.glasses, 'null.svg'));
     this.availableParts.push(new AvatarPartModel(9002, AvatarPartType.hair, 'null.svg'));
 
-    this.availableParts.push(new AvatarPartModel(1000, AvatarPartType.arm, 'Elefante_Avatar_Braco_01A.svg'));
-    this.availableParts.push(new AvatarPartModel(1001, AvatarPartType.arm, 'Elefante_Avatar_Braco_01B.svg'));
-    this.availableParts.push(new AvatarPartModel(1002, AvatarPartType.arm, 'Elefante_Avatar_Braco_01C.svg'));
-    this.availableParts.push(new AvatarPartModel(1003, AvatarPartType.arm, 'Elefante_Avatar_Braco_02A.svg'));
-    this.availableParts.push(new AvatarPartModel(1004, AvatarPartType.arm, 'Elefante_Avatar_Braco_02B.svg'));
-    this.availableParts.push(new AvatarPartModel(1005, AvatarPartType.arm, 'Elefante_Avatar_Braco_02C.svg'));
-    this.availableParts.push(new AvatarPartModel(1006, AvatarPartType.arm, 'Elefante_Avatar_Braco_03A.svg'));
-    this.availableParts.push(new AvatarPartModel(1007, AvatarPartType.arm, 'Elefante_Avatar_Braco_03B.svg'));
-    this.availableParts.push(new AvatarPartModel(1008, AvatarPartType.arm, 'Elefante_Avatar_Braco_03C.svg'));
-    this.availableParts.push(new AvatarPartModel(1009, AvatarPartType.arm, 'Elefante_Avatar_Braco_04A.svg'));
-    this.availableParts.push(new AvatarPartModel(1010, AvatarPartType.arm, 'Elefante_Avatar_Braco_04B.svg'));
-    this.availableParts.push(new AvatarPartModel(1011, AvatarPartType.arm, 'Elefante_Avatar_Braco_04C.svg'));
+    this.availableParts.push(new AvatarPartModel(0, AvatarPartType.arm, 'Elefante_Avatar_Braco_01A.svg', 'white'));
+    this.availableParts.push(new AvatarPartModel(1, AvatarPartType.arm, 'Elefante_Avatar_Braco_01B.svg', 'white'));
+    this.availableParts.push(new AvatarPartModel(2, AvatarPartType.arm, 'Elefante_Avatar_Braco_01C.svg', 'white'));
+    this.availableParts.push(new AvatarPartModel(3, AvatarPartType.arm, 'Elefante_Avatar_Braco_02A.svg', 'tammed'));
+    this.availableParts.push(new AvatarPartModel(4, AvatarPartType.arm, 'Elefante_Avatar_Braco_02B.svg', 'tammed'));
+    this.availableParts.push(new AvatarPartModel(5, AvatarPartType.arm, 'Elefante_Avatar_Braco_02C.svg', 'tammed'));
+    this.availableParts.push(new AvatarPartModel(6, AvatarPartType.arm, 'Elefante_Avatar_Braco_03A.svg', 'brown'));
+    this.availableParts.push(new AvatarPartModel(7, AvatarPartType.arm, 'Elefante_Avatar_Braco_03B.svg', 'brown'));
+    this.availableParts.push(new AvatarPartModel(8, AvatarPartType.arm, 'Elefante_Avatar_Braco_03C.svg', 'brown'));
+    this.availableParts.push(new AvatarPartModel(9, AvatarPartType.arm, 'Elefante_Avatar_Braco_04A.svg',  'black'));
+    this.availableParts.push(new AvatarPartModel(10, AvatarPartType.arm, 'Elefante_Avatar_Braco_04B.svg', 'black'));
+    this.availableParts.push(new AvatarPartModel(11, AvatarPartType.arm, 'Elefante_Avatar_Braco_04C.svg', 'black'));
 
     this.availableParts.forEach(p => { p.z = 1; });
 
-    let whiteArmsIndex = [1000, 1001, 1002];
-    let tammedArmsIndex = [1003, 1004, 1005];
-    let brownArmsIndex = [1006, 1007, 1008];
-    let blackArmsIndex = [1009, 1010, 1011];
+    this.availableParts.push(new AvatarPartModel(12, AvatarPartType.body, 'Elefante_Avatar_Corpo_01A.svg', 'white;'));
+    this.availableParts.push(new AvatarPartModel(13, AvatarPartType.body, 'Elefante_Avatar_Corpo_01B.svg', 'white;wheelchair'));
+    this.availableParts.push(new AvatarPartModel(14, AvatarPartType.body, 'Elefante_Avatar_Corpo_01C.svg', 'white;wheelchair'));
+    this.availableParts.push(new AvatarPartModel(15, AvatarPartType.body, 'Elefante_Avatar_Corpo_02A.svg', 'tammed'));
+    this.availableParts.push(new AvatarPartModel(16, AvatarPartType.body, 'Elefante_Avatar_Corpo_02B.svg', 'tammed;wheelchair'));
+    this.availableParts.push(new AvatarPartModel(17, AvatarPartType.body, 'Elefante_Avatar_Corpo_02C.svg', 'tammed;wheelchair'));
+    this.availableParts.push(new AvatarPartModel(18, AvatarPartType.body, 'Elefante_Avatar_Corpo_03A.svg', 'brown'));
+    this.availableParts.push(new AvatarPartModel(19, AvatarPartType.body, 'Elefante_Avatar_Corpo_03B.svg', 'brown;wheelchair'));
+    this.availableParts.push(new AvatarPartModel(20, AvatarPartType.body, 'Elefante_Avatar_Corpo_03C.svg', 'brown;wheelchair'));
+    this.availableParts.push(new AvatarPartModel(21, AvatarPartType.body, 'Elefante_Avatar_Corpo_04A.svg', 'black'));
+    this.availableParts.push(new AvatarPartModel(22, AvatarPartType.body, 'Elefante_Avatar_Corpo_04B.svg', 'black;wheelchair'));
+    this.availableParts.push(new AvatarPartModel(23, AvatarPartType.body, 'Elefante_Avatar_Corpo_04C.svg', 'black;wheelchair'));
 
-    let allButWhite = [...tammedArmsIndex, ...brownArmsIndex, ...blackArmsIndex];
-    let allButTammed = [...whiteArmsIndex, ...brownArmsIndex, ...blackArmsIndex];
-    let allButBrown = [...tammedArmsIndex, ...whiteArmsIndex, ...blackArmsIndex];
-    let allButBlack = [...tammedArmsIndex, ...brownArmsIndex, ...whiteArmsIndex];
-
-    this.availableParts.push(new AvatarPartModel(12, AvatarPartType.body, 'Elefante_Avatar_Corpo_01A.svg', [], allButWhite));
-    this.availableParts.push(new AvatarPartModel(13, AvatarPartType.body, 'Elefante_Avatar_Corpo_01B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButWhite));
-    this.availableParts.push(new AvatarPartModel(14, AvatarPartType.body, 'Elefante_Avatar_Corpo_01C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButWhite));
-    this.availableParts.push(new AvatarPartModel(15, AvatarPartType.body, 'Elefante_Avatar_Corpo_02A.svg', [], allButTammed));
-    this.availableParts.push(new AvatarPartModel(16, AvatarPartType.body, 'Elefante_Avatar_Corpo_02B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButTammed));
-    this.availableParts.push(new AvatarPartModel(17, AvatarPartType.body, 'Elefante_Avatar_Corpo_02C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButTammed));
-    this.availableParts.push(new AvatarPartModel(18, AvatarPartType.body, 'Elefante_Avatar_Corpo_03A.svg', [], allButBrown));
-    this.availableParts.push(new AvatarPartModel(19, AvatarPartType.body, 'Elefante_Avatar_Corpo_03B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBrown));
-    this.availableParts.push(new AvatarPartModel(20, AvatarPartType.body, 'Elefante_Avatar_Corpo_03C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBrown));
-    this.availableParts.push(new AvatarPartModel(21, AvatarPartType.body, 'Elefante_Avatar_Corpo_04A.svg', [], allButBlack));
-    this.availableParts.push(new AvatarPartModel(22, AvatarPartType.body, 'Elefante_Avatar_Corpo_04B.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBlack));
-    this.availableParts.push(new AvatarPartModel(23, AvatarPartType.body, 'Elefante_Avatar_Corpo_04C.svg', [AvatarPartType.lowerBody, AvatarPartType.foot], allButBlack));
     this.availableParts.push(new AvatarPartModel(24, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_01A.svg'));
     this.availableParts.push(new AvatarPartModel(25, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_01B.svg'));
     this.availableParts.push(new AvatarPartModel(26, AvatarPartType.eyes, 'Elefante_Avatar_Olhos_01C.svg'));
@@ -162,7 +153,7 @@ export class AvatarBuilderComponent implements OnInit {
 
 
     // todo: montar dinamicamente conforme this.availableParts (cada currentIndex vem do objeto salvo para o aluno)
-    this.avatarPartConfig[AvatarPartType.body] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.body).length, currentIndex: 0, rules: { disableParts: [] } };
+    this.avatarPartConfig[AvatarPartType.body] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.body).length, currentIndex: 0 };
     this.avatarPartConfig[AvatarPartType.eyes] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.eyes).length, currentIndex: 0 };
     this.avatarPartConfig[AvatarPartType.foot] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.foot).length, currentIndex: 0 };
     this.avatarPartConfig[AvatarPartType.glasses] = { totalParts: this.availableParts.filter(t => t.type == AvatarPartType.glasses).length, currentIndex: 0 };
@@ -182,23 +173,26 @@ export class AvatarBuilderComponent implements OnInit {
   }
 
   setAvatarPartModelToCurrentConfigIndex(type: AvatarPartType) {
-    // Retorna ao estado anterior as partes que estavam antes de
-    // a parte atual tê-las desabilitado (desfaz passo 2 anterior)
-    this.avatar.parts[type].data.disableTypes.forEach(t => {
-      this.avatar.parts[t].data = this.avatar.parts[t]._prevData;
-    });
-
-    // Marca nova parte atual (passo 1)
     this.avatar.parts[type].data = this.getPartModelForType(type);
 
-    // Atribui parte nula para os tipos que por ventura devam ser desabilitados (passo 2)
-    if (this.avatar.parts[type].data.hasDisableTypeRules) {
-      this.availableTypes = this.getAvailableTypes(this.avatar.parts[type].data.disableTypes);
+    if(this.groupType == AvatarPartType.body.toString()) {
 
-      this.avatar.parts[type].data.disableTypes.forEach(t => {
-        this.avatar.parts[t]._prevData = this.avatar.parts[t].data;
-        this.avatar.parts[t].data = this.availableParts[0]; //null part
-      });
+      if(this.avatar.parts[type].data.wheelChair) {
+        this.availableTypes = this.getAvailableTypes([AvatarPartType.lowerBody, AvatarPartType.foot]);
+        this.avatar.parts[AvatarPartType.lowerBody].data.visible = false;
+        this.avatar.parts[AvatarPartType.foot].data.visible = false;
+      } else {
+        this.availableTypes = this.getAvailableTypes([]);
+        this.avatar.parts[AvatarPartType.lowerBody].data.visible = true;
+        this.avatar.parts[AvatarPartType.foot].data.visible = true;
+      }
+
+      //if(this.avatar.parts[type].data.hasProps('white')) {
+      //  if(!this.avatar.parts[AvatarPartType.arm].data.hasProps('white')) {
+      //    let newArm = this.availableParts.filter(a => a.type == AvatarPartType.arm && a.hasProps());
+      //  }
+      //}
+
     }
 
     this.selectedPartInfo = `id: ${this.avatar.parts[type].data.id}, image: ${this.avatar.parts[type].data.imageFile};`;

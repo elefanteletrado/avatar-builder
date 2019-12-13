@@ -9,6 +9,8 @@ import { AvatarPartModel } from '../../classes/avatar-part-model';
 })
 export class AvatarPartComponent implements OnInit {
 
+  animState: string = 'initial';
+
   @Input() avatarPart: AvatarPartModel;
 
   constructor() {
@@ -22,7 +24,9 @@ export class AvatarPartComponent implements OnInit {
       ? 'assets/transparent-pixel.png'
       : `assets/parts/${AvatarPartType[this.avatarPart.type]}/${this.avatarPart.imageFile}`;
 
-    return file;
+      this.animState="initial";
+
+      return file;
   }
 
 }
