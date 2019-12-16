@@ -1,1 +1,8 @@
-<img *ngIf="avatarPart.visible" [src]="getImageFile()" type="image/svg+xml" class="avatar-part" [style.animState]="animState" />
+<img
+  *ngIf="avatarPart.visible"
+  [@fade]="state"
+  (@fade.done)="onDone($event)"
+  [src]="imageSource"
+  type="image/svg+xml"
+  class="avatar-part"
+/>
