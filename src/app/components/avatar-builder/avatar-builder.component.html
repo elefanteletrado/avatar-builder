@@ -1,14 +1,12 @@
+<button style="z-index: 1000;" mat-flat-button color="accent" (click)="changePart(groupType, -1)">Prev</button>
+<button style="z-index: 1000;" mat-flat-button color="accent" (click)="changePart(groupType, +1)">Next</button>
+<br />
 <mat-button-toggle-group
+  vertical
   #group="matButtonToggleGroup"
   [value]="groupType" (change)="typeChangeHandler(group.value)"
   style="z-index: 100;">
   <mat-button-toggle *ngFor="let t of availableTypes" [value]="t.index"><span>{{t.name}}</span></mat-button-toggle>
 </mat-button-toggle-group>
-
-<div class="example-selected-value">Selected group: {{groupType}}</div>
-<div class="example-selected-value">{{selectedPartInfo}}</div>
-
-<button mat-flat-button color="accent" (click)="changePart(groupType, -1)">Prev</button>
-<button mat-flat-button color="accent" (click)="changePart(groupType, +1)">Next</button>
 
 <app-avatar [avatar]="avatar"></app-avatar>

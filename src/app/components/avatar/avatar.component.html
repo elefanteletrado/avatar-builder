@@ -1,6 +1,6 @@
 <div name="avatar-component" >
   <app-avatar-part *ngFor="let part of getAvatarParts()"
-    style="position: absolute; border: 1px solid lightblue; width: 300px; "
+    style="position: absolute; width: 400px; top: 10px; left: 0; right: 0; margin-left: auto; margin-right: auto;"
     [style.zIndex]="part.data.z"
     [avatarPart]="part.data">
   </app-avatar-part>

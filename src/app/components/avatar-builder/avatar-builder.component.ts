@@ -13,7 +13,7 @@ export class AvatarBuilderComponent implements OnInit {
   private avatar: Avatar;
   public selectedPartInfo: string = '-';
   public availableTypes: Array<any>;
-  public groupType: string = '1';
+  public groupType: string = '7';
 
   constructor() { }
 
