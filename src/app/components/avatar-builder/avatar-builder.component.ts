@@ -22,7 +22,7 @@ export class AvatarBuilderComponent implements OnInit {
   }
 
 
-  private availableParts: Array<AvatarPartModel> = [];
+  public availableParts: Array<AvatarPartModel> = [];
   private avatarPartConfig: Array<any> = [];
 
   public typeChangeHandler(val: AvatarPartType) {

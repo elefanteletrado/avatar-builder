@@ -10,3 +10,5 @@
 </mat-button-toggle-group>
 
 <app-avatar [avatar]="avatar"></app-avatar>
+<img *ngFor="let part of availableParts" style="display:none;" src="{{part.fullImagePath}}" />
+

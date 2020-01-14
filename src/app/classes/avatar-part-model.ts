@@ -10,6 +10,7 @@ export class AvatarPartModel {
   public y: number;
   public z: number;
   public visible: boolean;
+  public fullImagePath: string;
 
   private props: Array<string> = [];
   public wheelChair: boolean;
@@ -28,6 +29,7 @@ export class AvatarPartModel {
     this.x = 0;
     this.y = 0;
     this.z = 0;
+    this.fullImagePath = 'assets/parts/' + AvatarPartType[this.type] + '/' + this.imageFile
     this.setProps(_props);
   }
 
