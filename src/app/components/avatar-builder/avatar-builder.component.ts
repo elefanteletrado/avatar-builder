@@ -10,7 +10,7 @@ import { Avatar } from '../../classes/avatar';
 })
 export class AvatarBuilderComponent implements OnInit {
 
-  private avatar: Avatar;
+  public avatar: Avatar;
   public selectedPartInfo: string = '-';
   public availableTypes: Array<any>;
   public groupType: string = '7';
